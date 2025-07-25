@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestor de Productos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Inventario</h1>
+    <form action="/agregar" method="post">
+        <input name="nombre" placeholder="Nombre" required>
+        <input name="unidades" type="number" placeholder="Unidades" required>
+        <input name="precio" type="number" step="0.01" placeholder="Precio" required>
+        <button type="submit">Agregar</button>
+    </form>
+    <ul>
+        {% for p in productos %}
+            <li>
+                <strong>{{ p.nombre }}</strong> - {{ p.unidades }} unidades - ${{ p.precio }}
+                <a href="/editar/{{ p.id }}">Editar</a>
+                <a href="/eliminar/{{ p.id }}">Eliminar</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
